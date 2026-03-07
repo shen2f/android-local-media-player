@@ -66,7 +66,7 @@ object StorageHelper {
             when (mediaType) {
                 Constants.MEDIA_TYPE_VIDEO -> MediaStore.Video.Media.DURATION
                 Constants.MEDIA_TYPE_AUDIO -> MediaStore.Audio.Media.DURATION
-                else -> 0
+                else -> ""
             }
         )
         
