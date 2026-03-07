@@ -32,6 +32,6 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("io.coil-kt:coil:2.5.0")
-    implementation("com.google.dagger.hilt.android:2.48")
-    kapt("com.google.dagger.hilt.android:compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 }

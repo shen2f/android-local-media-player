@@ -95,8 +95,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     
     // Hilt
-    implementation("com.google.dagger.hilt.android:2.48")
-    kapt("com.google.dagger.hilt.android:compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     
     // Test
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
