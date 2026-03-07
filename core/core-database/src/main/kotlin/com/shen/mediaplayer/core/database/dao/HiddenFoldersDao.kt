@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface HiddenFoldersDao {
     
     @Query("SELECT * FROM hidden_folders ORDER BY created_at DESC")
-    @JvmSuppressWildcards
-    fun getAll(): Flow<List<HiddenFoldersEntity>>
+    fun getAll(): Flow<@JvmSuppressWildcards List<HiddenFoldersEntity>>
     
     @Query("SELECT * FROM hidden_folders WHERE folder_path = :folderPath LIMIT 1")
     suspend fun getByPath(folderPath: String): HiddenFoldersEntity?
