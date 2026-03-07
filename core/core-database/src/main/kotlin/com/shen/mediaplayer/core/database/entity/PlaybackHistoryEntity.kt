@@ -24,7 +24,9 @@ data class PlaybackHistoryEntity(
     val fileSize: Long?,
     @ColumnInfo(name = "media_type")
     val mediaType: Int,
+    @ColumnInfo(name = "duration")
     val duration: Long?,
+    @ColumnInfo(name = "progress")
     val progress: Long = 0,
     @ColumnInfo(name = "folder_path")
     val folderPath: String,

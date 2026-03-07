@@ -28,7 +28,8 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             Constants.DB_NAME
-        ).build()
+        ).fallbackToDestructiveMigration()
+         .build()
     }
     
     @Provides

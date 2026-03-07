@@ -24,7 +24,7 @@ import com.shen.mediaplayer.core.database.entity.PlaylistsEntity
         PlaylistEntriesEntity::class,
         AppConfigEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
