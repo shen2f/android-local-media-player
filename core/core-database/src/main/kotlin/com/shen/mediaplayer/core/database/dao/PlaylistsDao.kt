@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.Flow
 interface PlaylistsDao {
     
     @Query("SELECT * FROM playlists ORDER BY created_at DESC")
-    fun getAll(): Flow<@JvmSuppressWildcards List<@JvmSuppressWildcards PlaylistsEntity>>
+    @JvmSuppressWildcards
+    fun getAll(): Flow<List<PlaylistsEntity>>
     
     @Query("SELECT * FROM playlists WHERE id = :id LIMIT 1")
     suspend fun getById(id: Long): PlaylistsEntity?
