@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_speed"
+        android:title="@string/playback_speed" />
+    <item
+        android:id="@+id/menu_scale"
+        android:title="@string/scale_mode" />
+    <item
+        android:id="@+id/menu_screenshot"
+        android:title="@string/screenshot" />
+    <item
+        android:id="@+id/menu_pip"
+        android:title="@string/picture_in_picture"
+        android:visible="@bool/is_pip_supported" />
+</menu>
