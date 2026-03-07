@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlaylistEntriesDao {
     
-    @Query("SELECT * FROM playlist_entries WHERE playlistId = :playlistId ORDER BY sortOrder ASC")
+    @Query("SELECT * FROM playlist_entries WHERE playlist_id = :playlistId ORDER BY sort_order ASC")
     fun getByPlaylistId(playlistId: Long): Flow<List<@JvmSuppressWildcards PlaylistEntriesEntity>>
     
     @Insert
@@ -20,7 +20,7 @@ interface PlaylistEntriesDao {
     @Delete
     suspend fun delete(entity: PlaylistEntriesEntity)
     
-    @Query("DELETE FROM playlist_entries WHERE playlistId = :playlistId AND filePath = :filePath")
+    @Query("DELETE FROM playlist_entries WHERE playlist_id = :playlistId AND file_path = :filePath")
     suspend fun deleteByPlaylistAndPath(playlistId: Long, filePath: String)
     
     @Query("DELETE FROM playlist_entries WHERE playlistId = :playlistId")

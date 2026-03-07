@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavoritesDao {
     
-    @Query("SELECT * FROM favorites WHERE mediaType = :mediaType ORDER BY createdAt DESC")
+    @Query("SELECT * FROM favorites WHERE media_type = :mediaType ORDER BY created_at DESC")
     fun getByMediaType(mediaType: Int): Flow<List<@JvmSuppressWildcards FavoritesEntity>>
     
     @Query("SELECT * FROM favorites WHERE filePath = :filePath LIMIT 1")
