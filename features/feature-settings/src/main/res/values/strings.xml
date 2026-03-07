@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playback_settings">播放设置</string>
+    <string name="playback_speed">播放速度</string>
+    <string name="autoplay_next">自动播放下一首</string>
+    <string name="resume_playback_on_startup">启动时恢复播放</string>
+    <string name="sleep_timer">睡眠定时</string>
+    <string name="off">关闭</string>
+    <string name="set_timer">设置定时</string>
+    <string name="ui_settings">界面设置</string>
+    <string name="theme_mode">主题模式</string>
+    <string name="follow_system">跟随系统</string>
+    <string name="light_mode">浅色模式</string>
+    <string name="dark_mode">深色模式</string>
+    <string name="dynamic_colors">动态颜色（Android 12+）</string>
+    <string name="privacy_settings">隐私设置</string>
+    <string name="private_folder_protection">私密文件夹保护</string>
+    <string name="disabled">已禁用</string>
+    <string name="enabled">已启用</string>
+    <string name="setup">设置</string>
+    <string name="use_biometrics">使用生物识别验证</string>
+    <string name="enable_online_features">启用在线功能</string>
+    <string name="online_features_description">默认关闭，仅在手动开启后联网，不会主动收集任何数据</string>
+    <string name="about">关于</string>
+    <string name="version">版本</string>
+    <string name="check_for_updates">检查更新</string>
+    <string name="check">检查</string>
+    <string name="timer_running">%d分钟后关闭</string>
+    <string name="select_sleep_timer">选择定时时间</string>
+    <string name="minutes">分钟</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="enter_password">请输入密码</string>
+    <string name="set_password">设置密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="password_not_match">两次输入密码不一致</string>
+    <string name="password_set_success">密码设置成功</string>
+    <string name="password_required">请输入密码</string>
+    <string name="wrong_password">密码错误</string>
+    <string name="clear_password">清除密码</string>
+    <string name="password_cleared">密码已清除</string>
+</resources>
