@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlaybackHistoryDao {
     
-    @Query("SELECT * FROM playback_history ORDER BY last_played_at DESC")
+    @Query("SELECT * FROM playback_history ORDER BY lastPlayedAt DESC")
     fun getAll(): Flow<List<@JvmSuppressWildcards PlaybackHistoryEntity>>
     
     @Query("SELECT * FROM playback_history WHERE filePath = :filePath LIMIT 1")
