@@ -30,5 +30,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.media3:media3-exoplayer:1.2.0")
     implementation("androidx.media3:media3-ui:1.2.0")
-    implementation("androidx.media3:media3-exoplayer-ffmpeg:1.2.0")
+    // androidx.media3:media3-exoplayer-ffmpeg is not published to Maven Central/Google Maven
+    // Official documentation states it needs to be compiled manually from source
+    // implementation("androidx.media3:media3-exoplayer-ffmpeg:1.2.0")
 }
