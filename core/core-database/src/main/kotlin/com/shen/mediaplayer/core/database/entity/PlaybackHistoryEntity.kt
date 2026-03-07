@@ -8,8 +8,8 @@ import com.shen.mediaplayer.core.common.Constants
 @Entity(
     tableName = "playback_history",
     indices = [
-        Index(value = ["last_played_at"], unique = false),
-        Index(value = ["file_path"], unique = true)
+        Index(value = ["lastPlayedAt"], unique = false),
+        Index(value = ["filePath"], unique = true)
     ]
 )
 data class PlaybackHistoryEntity(
