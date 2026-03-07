@@ -24,39 +24,39 @@ class AppPreferences(
     }
 
     // Playback Speed
-    val playbackSpeed: Float get() = getFloat(KEY_PLAYBACK_SPEED, 1.0f)
+    suspend fun getPlaybackSpeed(): Float = getFloat(KEY_PLAYBACK_SPEED, 1.0f)
     suspend fun savePlaybackSpeed(speed: Float) = saveFloat(KEY_PLAYBACK_SPEED, speed)
 
     // Auto Play Next
-    val autoPlayNext: Boolean get() = getBoolean(KEY_AUTO_PLAY_NEXT, true)
+    suspend fun getAutoPlayNext(): Boolean = getBoolean(KEY_AUTO_PLAY_NEXT, true)
     suspend fun saveAutoPlayNext(enabled: Boolean) = saveBoolean(KEY_AUTO_PLAY_NEXT, enabled)
 
     // Resume Playback On Startup
-    val resumePlaybackOnStartup: Boolean get() = getBoolean(KEY_RESUME_ON_STARTUP, true)
+    suspend fun getResumePlaybackOnStartup(): Boolean = getBoolean(KEY_RESUME_ON_STARTUP, true)
     suspend fun saveResumeOnStartup(enabled: Boolean) = saveBoolean(KEY_RESUME_ON_STARTUP, enabled)
 
     // Sleep Timer
-    val sleepTimerMinutes: Int get() = getInt(KEY_SLEEP_TIMER_MINUTES, 0)
+    suspend fun getSleepTimerMinutes(): Int = getInt(KEY_SLEEP_TIMER_MINUTES, 0)
     suspend fun saveSleepTimerMinutes(minutes: Int) = saveInt(KEY_SLEEP_TIMER_MINUTES, minutes)
 
     // Theme Mode
-    val themeMode: Int get() = getInt(KEY_THEME_MODE, THEME_SYSTEM)
+    suspend fun getThemeMode(): Int = getInt(KEY_THEME_MODE, THEME_SYSTEM)
     suspend fun saveThemeMode(mode: Int) = saveInt(KEY_THEME_MODE, mode)
 
     // Dynamic Colors
-    val dynamicColorsEnabled: Boolean get() = getBoolean(KEY_DYNAMIC_COLORS_ENABLED, false)
+    suspend fun getDynamicColorsEnabled(): Boolean = getBoolean(KEY_DYNAMIC_COLORS_ENABLED, false)
     suspend fun saveDynamicColorsEnabled(enabled: Boolean) = saveBoolean(KEY_DYNAMIC_COLORS_ENABLED, enabled)
 
     // Private Folder Password
-    val privateFolderPassword: String? get() = getString(KEY_PRIVATE_FOLDER_PASSWORD, null)
+    suspend fun getPrivateFolderPassword(): String? = getString(KEY_PRIVATE_FOLDER_PASSWORD, null)
     suspend fun savePrivateFolderPassword(password: String?) = saveString(KEY_PRIVATE_FOLDER_PASSWORD, password)
 
     // Biometrics Enabled
-    val biometricsEnabled: Boolean get() = getBoolean(KEY_BIOMETRICS_ENABLED, false)
+    suspend fun getBiometricsEnabled(): Boolean = getBoolean(KEY_BIOMETRICS_ENABLED, false)
     suspend fun saveBiometricsEnabled(enabled: Boolean) = saveBoolean(KEY_BIOMETRICS_ENABLED, enabled)
 
     // Online Features Enabled
-    val onlineFeaturesEnabled: Boolean get() = getBoolean(KEY_ONLINE_FEATURES_ENABLED, false)
+    suspend fun getOnlineFeaturesEnabled(): Boolean = getBoolean(KEY_ONLINE_FEATURES_ENABLED, false)
     suspend fun saveOnlineFeaturesEnabled(enabled: Boolean) = saveBoolean(KEY_ONLINE_FEATURES_ENABLED, enabled)
 
     private suspend fun getString(key: String, defaultValue: String?): String? {
@@ -71,7 +71,7 @@ class AppPreferences(
         }
     }
 
-    private fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+    private suspend fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         return getString(key, null)?.toBooleanStrictOrNull() ?: defaultValue
     }
 
@@ -79,7 +79,7 @@ class AppPreferences(
         saveString(key, value.toString())
     }
 
-    private fun getInt(key: String, defaultValue: Int): Int {
+    private suspend fun getInt(key: String, defaultValue: Int): Int {
         return getString(key, null)?.toIntOrNull() ?: defaultValue
     }
 
@@ -87,7 +87,7 @@ class AppPreferences(
         saveString(key, value.toString())
     }
 
-    private fun getFloat(key: String, defaultValue: Float): Float {
+    private suspend fun getFloat(key: String, defaultValue: Float): Float {
         return getString(key, null)?.toFloatOrNull() ?: defaultValue
     }
 
