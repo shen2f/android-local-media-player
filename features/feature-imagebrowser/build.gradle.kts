@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.shen.mediaplayer.feature.settings"
+    namespace = "com.shen.mediaplayer.feature.imagebrowser"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
@@ -24,13 +24,14 @@ dependencies {
     implementation(project(":core:core-common"))
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-domain"))
-    implementation(project(":media:media-player"))
+    implementation(project(":utils:utils-image"))
     
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.biometric:biometric:1.1.0")
+    implementation("io.coil-kt:coil:2.5.0")
     implementation("com.google.dagger.hilt.android:2.48")
     kapt("com.google.dagger.hilt.android:compiler:2.48")
 }
