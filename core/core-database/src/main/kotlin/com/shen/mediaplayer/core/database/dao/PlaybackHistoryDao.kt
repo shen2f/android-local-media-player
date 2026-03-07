@@ -11,7 +11,7 @@ interface PlaybackHistoryDao {
     @Query("SELECT * FROM playback_history ORDER BY last_played_at DESC")
     fun getAll(): Flow<List<@JvmSuppressWildcards PlaybackHistoryEntity>>
     
-    @Query("SELECT * FROM playback_history WHERE filePath = :filePath LIMIT 1")
+    @Query("SELECT * FROM playback_history WHERE file_path = :filePath LIMIT 1")
     suspend fun getByPath(filePath: String): PlaybackHistoryEntity?
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -11,7 +11,7 @@ interface FavoritesDao {
     @Query("SELECT * FROM favorites WHERE media_type = :mediaType ORDER BY created_at DESC")
     fun getByMediaType(mediaType: Int): Flow<List<@JvmSuppressWildcards FavoritesEntity>>
     
-    @Query("SELECT * FROM favorites WHERE filePath = :filePath LIMIT 1")
+    @Query("SELECT * FROM favorites WHERE file_path = :filePath LIMIT 1")
     suspend fun getByPath(filePath: String): FavoritesEntity?
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)

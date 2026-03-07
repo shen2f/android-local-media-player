@@ -23,6 +23,6 @@ interface PlaylistEntriesDao {
     @Query("DELETE FROM playlist_entries WHERE playlist_id = :playlistId AND file_path = :filePath")
     suspend fun deleteByPlaylistAndPath(playlistId: Long, filePath: String)
     
-    @Query("DELETE FROM playlist_entries WHERE playlistId = :playlistId")
+    @Query("DELETE FROM playlist_entries WHERE playlist_id = :playlistId")
     suspend fun deleteByPlaylistId(playlistId: Long)
 }
