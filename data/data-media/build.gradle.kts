@@ -25,6 +25,8 @@ android {
     }
 }
 
+val hiltVersion = rootProject.extra["hiltVersion"] as String
+
 dependencies {
     implementation(project(":core:core-common"))
     implementation(project(":core:core-domain"))
@@ -34,8 +36,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     
     // Hilt
-    implementation("com.google.dagger:hilt-android:${rootProject.ext.get("hiltVersion")}")
-    kapt("com.google.dagger:hilt-android-compiler:${rootProject.ext.get("hiltVersion")}")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     // JSR 330 inject annotations
     implementation("javax.inject:javax.inject:1")
 }
