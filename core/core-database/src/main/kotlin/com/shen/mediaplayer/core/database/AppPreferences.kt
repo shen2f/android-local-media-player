@@ -1,9 +1,7 @@
-package com.shen.mediaplayer.core.common
+package com.shen.mediaplayer.core.database
 
 import com.shen.mediaplayer.core.database.dao.AppConfigDao
 import com.shen.mediaplayer.core.database.entity.AppConfigEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 class AppPreferences(
     private val appConfigDao: AppConfigDao

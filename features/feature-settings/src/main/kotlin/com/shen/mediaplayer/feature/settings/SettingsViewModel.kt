@@ -2,7 +2,7 @@ package com.shen.mediaplayer.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shen.mediaplayer.core.common.AppPreferences
+import com.shen.mediaplayer.core.database.AppPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

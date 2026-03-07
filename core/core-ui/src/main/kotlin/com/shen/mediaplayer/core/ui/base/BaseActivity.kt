@@ -3,7 +3,7 @@ package com.shen.mediaplayer.core.ui.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.LocaleListCompat
-import com.shen.mediaplayer.core.common.AppPreferences
+import com.shen.mediaplayer.core.database.AppPreferences
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
