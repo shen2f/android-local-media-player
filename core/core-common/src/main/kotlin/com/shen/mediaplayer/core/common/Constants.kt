@@ -20,4 +20,22 @@ object Constants {
         "/sdcard/Music",
         "/sdcard/Pictures"
     )
+
+    // Video file extensions
+    val VIDEO_EXTENSIONS = setOf(
+        "mp4", "mkv", "avi", "rmvb", "flv", "wmv", "webm",
+        "mov", "mpeg", "mpg", "3gp", "ts", "m4v"
+    )
+
+    // Audio file extensions
+    val AUDIO_EXTENSIONS = setOf(
+        "mp3", "aac", "flac", "wav", "ogg", "m4a", "wma",
+        "ape", "alac", "aif", "aiff"
+    )
+
+    // Image file extensions
+    val IMAGE_EXTENSIONS = setOf(
+        "jpg", "jpeg", "png", "gif", "webp", "bmp", "heic",
+        "heif", "raw"
+    )
 }
