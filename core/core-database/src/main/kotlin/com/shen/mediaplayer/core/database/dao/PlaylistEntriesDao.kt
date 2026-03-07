@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface PlaylistEntriesDao {
     
     @Query("SELECT * FROM playlist_entries WHERE playlist_id = :playlistId ORDER BY sort_order ASC")
-    fun getByPlaylistId(playlistId: Long): Flow<List<@JvmSuppressWildcards PlaylistEntriesEntity>>
+    fun getByPlaylistId(playlistId: Long): Flow<@JvmSuppressWildcards List<@JvmSuppressWildcards PlaylistEntriesEntity>>
     
     @Insert
     suspend fun insert(entity: PlaylistEntriesEntity): Long
