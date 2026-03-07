@@ -13,6 +13,13 @@ android {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas"
+                )
+            }
+        }
     }
 
     compileOptions {
@@ -26,7 +33,7 @@ android {
 }
 
 room {
-    schemaLocation("file:./schemas")
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
