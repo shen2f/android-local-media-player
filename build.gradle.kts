@@ -9,28 +9,28 @@ plugins {
 
 ext {
     // Core versions
-    val kotlinVersion = "1.9.20"
-    val agpVersion = "8.2.0"
-    val compileSdk = 34
-    val minSdk = 26
-    val targetSdk = 34
+    extra["kotlinVersion"] = "1.9.20"
+    extra["agpVersion"] = "8.2.0"
+    extra["compileSdk"] = 34
+    extra["minSdk"] = 26
+    extra["targetSdk"] = 34
     
     // Jetpack versions
-    val coreKtxVersion = "1.12.0"
-    val lifecycleVersion = "2.6.2"
-    val activityComposeVersion = "1.8.2"
-    val composeBomVersion = "2023.10.01"
+    extra["coreKtxVersion"] = "1.12.0"
+    extra["lifecycleVersion"] = "2.6.2"
+    extra["activityComposeVersion"] = "1.8.2"
+    extra["composeBomVersion"] = "2023.10.01"
     
     // Third party versions
-    val hiltVersion = "2.48"
-    val roomVersion = "2.6.1"
-    val exoPlayerVersion = "1.2.0"
-    val coilVersion = "2.5.0"
-    val accompanistVersion = "0.32.0"
+    extra["hiltVersion"] = "2.48"
+    extra["roomVersion"] = "2.6.1"
+    extra["exoPlayerVersion"] = "1.2.0"
+    extra["coilVersion"] = "2.5.0"
+    extra["accompanistVersion"] = "0.32.0"
     
     // Test versions
-    val junitVersion = "5.10.0"
-    val mockkVersion = "1.13.8"
-    val androidTestJunitVersion = "1.1.5"
-    val espressoVersion = "3.5.1"
+    extra["junitVersion"] = "5.10.0"
+    extra["mockkVersion"] = "1.13.8"
+    extra["androidTestJunitVersion"] = "1.1.5"
+    extra["espressoVersion"] = "3.5.1"
 }
