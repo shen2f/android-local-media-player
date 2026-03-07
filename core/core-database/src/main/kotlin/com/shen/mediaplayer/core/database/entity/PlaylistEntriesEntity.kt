@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
     tableName = "playlist_entries",
     indices = [
         Index(value = ["playlistId"], unique = false),
-        Index(value = ["playlistId, sortOrder"], unique = false)
+        Index(value = ["playlistId", "sortOrder"], unique = false)
     ]
 )
 data class PlaylistEntriesEntity(
