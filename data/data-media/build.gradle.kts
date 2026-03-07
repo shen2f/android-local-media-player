@@ -36,4 +36,6 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:${rootProject.ext.get("hiltVersion")}")
     kapt("com.google.dagger:hilt-android-compiler:${rootProject.ext.get("hiltVersion")}")
+    // JSR 330 inject annotations
+    implementation("javax.inject:javax.inject:1")
 }
