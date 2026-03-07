@@ -31,5 +31,5 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.2.0")
     implementation("androidx.media3:media3-ui:1.2.0")
     // Use prebuilt FFmpeg extension from JitPack (third-party maintained fork)
-    implementation("com.github.y20k:media3:media3-exoplayer-ffmpeg:1.2.0")
+    implementation("com.github.y20k:media3-exoplayer-ffmpeg:1.2.0")
 }
