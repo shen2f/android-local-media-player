@@ -2,13 +2,14 @@ package com.shen.mediaplayer.core.database.dao
 
 import androidx.room.*
 import com.shen.mediaplayer.core.database.entity.PlaylistsEntity
+import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlaylistsDao {
     
     @Query("SELECT * FROM playlists ORDER BY createdAt DESC")
-    fun getAll(): Flow<List<PlaylistsEntity>>
+    fun getAll(): Flow<List<@JvmSuppressWildcards PlaylistsEntity>>
     
     @Query("SELECT * FROM playlists WHERE id = :id LIMIT 1")
     suspend fun getById(id: Long): PlaylistsEntity?

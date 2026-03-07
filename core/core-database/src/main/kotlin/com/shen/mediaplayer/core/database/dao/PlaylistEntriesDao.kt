@@ -2,13 +2,14 @@ package com.shen.mediaplayer.core.database.dao
 
 import androidx.room.*
 import com.shen.mediaplayer.core.database.entity.PlaylistEntriesEntity
+import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlaylistEntriesDao {
     
     @Query("SELECT * FROM playlist_entries WHERE playlistId = :playlistId ORDER BY sortOrder ASC")
-    fun getByPlaylistId(playlistId: Long): Flow<List<PlaylistEntriesEntity>>
+    fun getByPlaylistId(playlistId: Long): Flow<List<@JvmSuppressWildcards PlaylistEntriesEntity>>
     
     @Insert
     suspend fun insert(entity: PlaylistEntriesEntity): Long

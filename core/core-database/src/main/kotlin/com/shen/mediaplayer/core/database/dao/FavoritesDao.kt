@@ -2,13 +2,14 @@ package com.shen.mediaplayer.core.database.dao
 
 import androidx.room.*
 import com.shen.mediaplayer.core.database.entity.FavoritesEntity
+import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoritesDao {
     
     @Query("SELECT * FROM favorites WHERE mediaType = :mediaType ORDER BY createdAt DESC")
-    fun getByMediaType(mediaType: Int): Flow<List<FavoritesEntity>>
+    fun getByMediaType(mediaType: Int): Flow<List<@JvmSuppressWildcards FavoritesEntity>>
     
     @Query("SELECT * FROM favorites WHERE filePath = :filePath LIMIT 1")
     suspend fun getByPath(filePath: String): FavoritesEntity?
