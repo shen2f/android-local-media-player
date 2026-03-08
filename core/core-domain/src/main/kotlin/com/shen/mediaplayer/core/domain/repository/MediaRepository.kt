@@ -1,0 +1,11 @@
+package com.shen.mediaplayer.core.domain.repository
+
+import com.shen.mediaplayer.core.common.model.MediaFile
+import com.shen.mediaplayer.feature.folders.FolderItem
+
+interface MediaRepository {
+    suspend fun getAllAudioFiles(): List<MediaFile>
+    suspend fun getAllVideoFiles(): List<MediaFile>
+    suspend fun getFolderContent(path: String?): List<FolderItem>
+    suspend fun getMediaFilesInFolder(path: String): List<MediaFile>
+}

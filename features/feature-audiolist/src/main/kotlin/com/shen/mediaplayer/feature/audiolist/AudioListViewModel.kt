@@ -26,10 +26,11 @@ class AudioListViewModel @Inject constructor(
         _isLoading.value = true
         viewModelScope.launch {
             val allAudio = mediaRepository.getAllAudioFiles()
-            val groupedByAlbum = allAudio.groupBy { it.album ?: "未知专辑" }
+            val groupedByFolder = allAudio.groupBy { it.folderPath }
             val items = mutableListOf<AudioListAdapter.Item>()
-            groupedByAlbum.forEach { (album, audios) ->
-                items.add(AudioListAdapter.Item.Category("$album (${audios.size})"))
+            groupedByFolder.forEach { (folder, audios) ->
+                val folderName = folder.substringAfterLast('/')
+                items.add(AudioListAdapter.Item.Category("$folderName (${audios.size})"))
                 items.addAll(audios.map { AudioListAdapter.Item.Audio(it) })
             }
             _audioList.value = items

@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shen.mediaplayer.core.common.model.FolderItem
 import com.shen.mediaplayer.core.ui.base.BaseFragment
 import com.shen.mediaplayer.feature.folders.adapter.FolderAdapter
 import com.shen.mediaplayer.feature.folders.databinding.FragmentFoldersBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FoldersFragment : BaseFragment<FragmentFoldersBinding>() {
@@ -26,8 +28,7 @@ class FoldersFragment : BaseFragment<FragmentFoldersBinding>() {
         return FragmentFoldersBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(binding: FragmentFoldersBinding, savedInstanceState: Bundle?) {
         setupToolbar()
         setupRecyclerView()
         setupObservers()
@@ -62,26 +63,31 @@ class FoldersFragment : BaseFragment<FragmentFoldersBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.folderItems.observe(viewLifecycleOwner) { items ->
-            adapter.submitList(items)
-            binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
-        }
-
-        viewModel.currentTitle.observe(viewLifecycleOwner) { title ->
-            binding.toolbar.title = title
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.swipeRefresh.isRefreshing = isLoading
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.folderItems.collect { items ->
+                        adapter.submitList(items)
+                        binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
+                launch {
+                    viewModel.currentTitle.collect { title ->
+                        binding.toolbar.title = title
+                    }
+                }
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.swipeRefresh.isRefreshing = isLoading
+                    }
+                }
+            }
         }
     }
 
     private fun onItemClick(folderItem: FolderItem) {
-        if (folderItem.isFolder) {
-            viewModel.loadFolder(folderItem.path)
-        } else {
-            // TODO: Open media file based on type
-        }
+        // All items in this list are folders
+        viewModel.loadFolder(folderItem.path)
     }
 
     private fun onMoreClick(folderItem: FolderItem) {

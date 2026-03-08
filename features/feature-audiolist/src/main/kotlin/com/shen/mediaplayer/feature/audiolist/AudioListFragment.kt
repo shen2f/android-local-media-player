@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shen.mediaplayer.core.common.model.MediaFile
 import com.shen.mediaplayer.core.ui.base.BaseFragment
 import com.shen.mediaplayer.feature.audiolist.adapter.AudioListAdapter
 import com.shen.mediaplayer.feature.audiolist.databinding.FragmentAudioListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AudioListFragment : BaseFragment<FragmentAudioListBinding>() {
@@ -25,8 +29,7 @@ class AudioListFragment : BaseFragment<FragmentAudioListBinding>() {
         return FragmentAudioListBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(binding: FragmentAudioListBinding, savedInstanceState: Bundle?) {
         setupRecyclerView()
         setupObservers()
         viewModel.loadAudioList()
@@ -51,13 +54,20 @@ class AudioListFragment : BaseFragment<FragmentAudioListBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.audioList.observe(viewLifecycleOwner) { audios ->
-            adapter.submitList(audios)
-            binding.emptyState.visibility = if (audios.isEmpty()) View.VISIBLE else View.GONE
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.swipeRefresh.isRefreshing = isLoading
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.audioList.collect { audios ->
+                        adapter.submitList(audios)
+                        binding.emptyState.visibility = if (audios.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.swipeRefresh.isRefreshing = isLoading
+                    }
+                }
+            }
         }
     }
 

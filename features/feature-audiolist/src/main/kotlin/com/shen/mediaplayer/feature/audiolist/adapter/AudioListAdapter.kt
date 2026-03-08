@@ -64,20 +64,8 @@ class AudioListAdapter(
         }
 
         fun bind(mediaFile: MediaFile) {
-            binding.tvTitle.text = mediaFile.title
-            val artistAlbum = buildString {
-                if (!mediaFile.artist.isNullOrEmpty()) {
-                    append(mediaFile.artist)
-                }
-                if (!mediaFile.album.isNullOrEmpty()) {
-                    if (!mediaFile.artist.isNullOrEmpty()) append(" - ")
-                    append(mediaFile.album)
-                }
-                if (mediaFile.artist.isNullOrEmpty() && mediaFile.album.isNullOrEmpty()) {
-                    append(mediaFile.displayName)
-                }
-            }
-            binding.tvArtistAlbum.text = artistAlbum
+            binding.tvTitle.text = mediaFile.fileName
+            binding.tvArtistAlbum.text = mediaFile.folderPath
             binding.tvDuration.text = formatDuration(mediaFile.duration)
         }
 

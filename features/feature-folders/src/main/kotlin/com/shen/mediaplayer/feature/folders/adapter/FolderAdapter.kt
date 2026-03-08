@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shen.mediaplayer.core.common.model.FolderItem
+import com.shen.mediaplayer.feature.folders.FolderItem
+import com.shen.mediaplayer.feature.folders.R
 import com.shen.mediaplayer.feature.folders.databinding.ItemFolderBinding
 
 class FolderAdapter(
@@ -47,25 +48,8 @@ class FolderAdapter(
 
         fun bind(folderItem: FolderItem) {
             binding.tvName.text = folderItem.name
-            val countText = buildString {
-                if (folderItem.isFolder) {
-                    append("${folderItem.mediaCount} 个媒体文件")
-                } else {
-                    append(folderItem.mimeType ?: "未知类型")
-                }
-            }
-            binding.tvCount.text = countText
-            val iconRes = if (folderItem.isFolder) {
-                R.drawable.ic_folder
-            } else {
-                when {
-                    folderItem.isVideo -> R.drawable.ic_video
-                    folderItem.isAudio -> R.drawable.ic_music
-                    folderItem.isImage -> R.drawable.ic_image
-                    else -> R.drawable.ic_file
-                }
-            }
-            binding.ivIcon.setImageResource(iconRes)
+            binding.tvCount.text = "${folderItem.mediaCount} 个媒体文件"
+            binding.ivIcon.setImageResource(android.R.drawable.ic_menu_gallery)
         }
     }
 

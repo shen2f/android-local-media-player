@@ -127,14 +127,6 @@
                 android:src="@drawable/ic_replay_10" />
 
             <ImageButton
-                android:id="@+id/btnRewind"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/rewind_10s"
-                android:src="@drawable/ic_replay_10" />
-
-            <ImageButton
                 android:id="@+id/btnPlayPause"
                 android:layout_width="64dp"
                 android:layout_height="64dp"

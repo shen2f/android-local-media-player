@@ -2,9 +2,9 @@ package com.shen.mediaplayer.feature_playlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shen.mediaplayer.core_domain.repository.PlaylistRepository
-import com.shen.mediaplayer.data_local.entity.PlaylistEntity
-import com.shen.mediaplayer.data_local.entity.PlaylistEntryEntity
+import com.shen.mediaplayer.feature_playlist.entity.PlaylistEntity
+import com.shen.mediaplayer.feature_playlist.entity.PlaylistEntryEntity
+import com.shen.mediaplayer.feature_playlist.repository.PlaylistRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -7,37 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.shen.mediaplayer.core_common.R
-import com.shen.mediaplayer.data_local.entity.PlaylistEntity
-import com.shen.mediaplayer.data_local.entity.PlaylistEntryEntity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.shen.mediaplayer.core.common.model.MediaFile
+import com.shen.mediaplayer.core.ui.base.BaseFragment
+import com.shen.mediaplayer.feature_playlist.R
+import com.shen.mediaplayer.feature_playlist.adapter.PlaylistAdapter
+import com.shen.mediaplayer.feature_playlist.adapter.PlaylistEntryAdapter
+import com.shen.mediaplayer.feature_playlist.databinding.FragmentPlaylistBinding
+import com.shen.mediaplayer.feature_playlist.entity.PlaylistEntity
+import com.shen.mediaplayer.feature_playlist.entity.PlaylistEntryEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PlaylistFragment : Fragment() {
+class PlaylistFragment : BaseFragment<FragmentPlaylistBinding>() {
 
-    private lateinit var viewModel: PlaylistViewModel
+    private val viewModel: PlaylistViewModel by viewModels()
     private lateinit var playlistAdapter: PlaylistAdapter
     private lateinit var playlistEntryAdapter: PlaylistEntryAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_playlist, container, false)
+    override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentPlaylistBinding {
+        return FragmentPlaylistBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = getDefaultViewModelProviderFactory().create(PlaylistViewModel::class.java)
+    override fun onViewCreated(binding: FragmentPlaylistBinding, savedInstanceState: Bundle?) {
         initRecyclerView()
         initObservers()
         initFab()
@@ -48,22 +48,30 @@ class PlaylistFragment : Fragment() {
             onItemClick = { playlist ->
                 openPlaylistDetail(playlist)
             },
-            onLongClick = { playlist ->
+            onMoreClick = { playlist ->
                 showPlaylistOptionsDialog(playlist)
             }
         )
 
         playlistEntryAdapter = PlaylistEntryAdapter(
-            onItemClick = { entry ->
+            onItemClick = { mediaFile ->
                 // TODO: play the song
             },
-            onRemoveClick = { entry ->
-                viewModel.removeSongFromPlaylist(entry)
+            onMoreClick = { mediaFile ->
+                // TODO: show more options
+            },
+            onRemoveClick = { mediaFile ->
+                // TODO: implement remove from playlist
             }
         )
 
-        requireView().findViewById<RecyclerView>(R.id.playlistsRecyclerView).apply {
+        binding.playlistsRecyclerView.apply {
             adapter = playlistAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        binding.playlistEntriesRecyclerView.apply {
+            adapter = playlistEntryAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
@@ -87,19 +95,13 @@ class PlaylistFragment : Fragment() {
             ): Boolean {
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
-                val currentList = viewModel.currentPlaylistEntries.value.toMutableList()
-                val item = currentList.removeAt(fromPosition)
-                currentList.add(toPosition, item)
-                playlistEntryAdapter.submitList(currentList)
-                viewModel.updateEntrySortOrder(currentList)
+                // TODO: implement drag and drop reordering
                 return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
         })
-        itemTouchHelper.attachToRecyclerView(
-            requireView().findViewById<RecyclerView>(R.id.playlistEntriesRecyclerView)
-        )
+        itemTouchHelper.attachToRecyclerView(binding.playlistEntriesRecyclerView)
     }
 
     private fun initObservers() {
@@ -130,7 +132,7 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun initFab() {
-        requireView().findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.createPlaylistFab).setOnClickListener {
+        binding.createPlaylistFab.setOnClickListener {
             showCreatePlaylistDialog()
         }
     }
@@ -171,7 +173,7 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun showEditPlaylistDialog(playlist: PlaylistEntity) {
-        val dialogView = LayoutInflater.getLogger().inflate(R.layout.dialog_create_playlist, null)
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_create_playlist, null)
         val nameEditText = dialogView.findViewById<EditText>(R.id.playlistNameEditText)
         val descEditText = dialogView.findViewById<EditText>(R.id.playlistDescriptionEditText)
 
@@ -206,7 +208,7 @@ class PlaylistFragment : Fragment() {
     private fun openPlaylistDetail(playlist: PlaylistEntity) {
         viewModel.loadPlaylistEntries(playlist.id)
         // Switch to detail view
-        requireView().findViewById<View>(R.id.playlistsContainer).visibility = View.GONE
-        requireView().findViewById<View>(R.id.playlistDetailContainer).visibility = View.VISIBLE
+        binding.playlistsContainer.visibility = View.GONE
+        binding.playlistDetailContainer.visibility = View.VISIBLE
     }
 }

@@ -27,7 +27,7 @@ class FileManagerDialog(
         dialog.setContentView(binding.root)
 
         // Set current filename
-        binding.tvFileName.text = mediaFile.displayName
+        binding.tvFileName.text = mediaFile.fileName
         binding.cbFavorite.isChecked = isFavorite
 
         // Set click listeners
@@ -65,9 +65,15 @@ class FileManagerDialog(
     }
 
     private fun shareFile(mediaFile: MediaFile) {
+        val file = java.io.File(mediaFile.filePath)
+        val uri = androidx.core.content.FileProvider.getUriForFile(
+            activity,
+            activity.packageName + ".fileprovider",
+            file
+        )
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_STREAM, mediaFile.uri)
+            putExtra(Intent.EXTRA_STREAM, uri)
             type = mediaFile.mimeType
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
@@ -75,11 +81,12 @@ class FileManagerDialog(
     }
 
     private fun showRenameDialog(mediaFile: MediaFile) {
-        val currentName = mediaFile.displayName
+        val currentName = mediaFile.fileName
         val input = android.widget.EditText(activity).apply {
-            setText(currentName)
+            setText(currentName as CharSequence)
             inputType = InputType.TYPE_CLASS_TEXT
-            setSelection(0, currentName.lastIndexOf('.'))
+            val dotIndex = currentName.lastIndexOf('.')
+            setSelection(0, if (dotIndex > 0) dotIndex else currentName.length)
         }
 
         AlertDialog.Builder(activity)
@@ -98,7 +105,7 @@ class FileManagerDialog(
     private fun showDeleteConfirmDialog(mediaFile: MediaFile) {
         AlertDialog.Builder(activity)
             .setTitle("删除文件")
-            .setMessage("确定要删除 \"${mediaFile.displayName}\" 吗？此操作不可撤销。")
+            .setMessage("确定要删除 \"${mediaFile.fileName}\" 吗？此操作不可撤销。")
             .setPositiveButton("删除") { _, _ ->
                 onDelete(mediaFile)
             }

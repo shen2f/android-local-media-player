@@ -5,7 +5,7 @@ import com.shen.mediaplayer.core.database.entity.HiddenFoldersEntity
 import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.Flow
 
-// @Dao
+@Dao
 interface HiddenFoldersDao {
     
     @Query("SELECT * FROM hidden_folders ORDER BY created_at DESC")

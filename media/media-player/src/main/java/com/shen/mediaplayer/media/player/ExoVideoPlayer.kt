@@ -131,7 +131,7 @@ class ExoVideoPlayer @Inject constructor(
     }
 
     override fun getPlaybackSpeed(): Float {
-        return exoPlayer?.playbackSpeed ?: 1f
+        return exoPlayer?.playbackParameters?.speed ?: 1f
     }
 
     override fun toggleMute(): Boolean {

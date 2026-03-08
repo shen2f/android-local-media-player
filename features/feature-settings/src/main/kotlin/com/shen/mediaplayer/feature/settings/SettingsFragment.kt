@@ -12,6 +12,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -30,13 +31,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
-    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentSettingsBinding {
+    private val vm: SettingsViewModel by viewModels()
+
+    override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentSettingsBinding {
         return FragmentSettingsBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val vm = getViewModel<SettingsViewModel>()
+    override fun onViewCreated(binding: FragmentSettingsBinding, savedInstanceState: Bundle?) {
 
         initBiometrics()
         setupPlaybackSettings(vm)
@@ -232,8 +233,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             .setView(dialogView)
             .setPositiveButton(R.string.ok) { _, _ ->
                 val input = etPassword.text.toString()
-                val verified = vm.verifyPassword(input)
-                onResult(verified)
+                lifecycleScope.launch {
+                    val verified = vm.verifyPassword(input)
+                    onResult(verified)
+                }
             }
             .setNegativeButton(R.string.cancel, null)
             .show()

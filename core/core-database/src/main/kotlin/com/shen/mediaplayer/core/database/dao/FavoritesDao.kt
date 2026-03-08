@@ -5,7 +5,7 @@ import com.shen.mediaplayer.core.database.entity.FavoritesEntity
 import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.Flow
 
-// @Dao
+@Dao
 interface FavoritesDao {
     
     @Query("SELECT * FROM favorites WHERE media_type = :mediaType ORDER BY created_at DESC")
