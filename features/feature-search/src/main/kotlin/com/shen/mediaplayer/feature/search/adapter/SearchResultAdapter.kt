@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shen.mediaplayer.core.common.model.MediaFile
-import com.shen.mediaplayer.feature.search.R
+import com.shen.mediaplayer.core.ui.R
 import com.shen.mediaplayer.feature.search.databinding.ItemSearchResultBinding
 
 class SearchResultAdapter(
@@ -44,10 +44,10 @@ class SearchResultAdapter(
             binding.tvPath.text = mediaFile.filePath.substringBeforeLast('/')
             
             val iconRes = when {
-                mediaFile.isVideo -> com.shen.mediaplayer.core.ui.R.drawable.ic_video
-                mediaFile.isAudio -> com.shen.mediaplayer.core.ui.R.drawable.ic_music
-                mediaFile.isImage -> com.shen.mediaplayer.core.ui.R.drawable.ic_image
-                else -> com.shen.mediaplayer.core.ui.R.drawable.ic_file
+                mediaFile.isVideo -> R.drawable.ic_video
+                mediaFile.isAudio -> R.drawable.ic_music
+                mediaFile.isImage -> R.drawable.ic_image
+                else -> R.drawable.ic_file
             }
             binding.ivIcon.setImageResource(iconRes)
 
