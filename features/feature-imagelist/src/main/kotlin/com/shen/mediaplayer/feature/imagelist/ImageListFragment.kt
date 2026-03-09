@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shen.mediaplayer.core.common.model.MediaFile
@@ -12,6 +15,7 @@ import com.shen.mediaplayer.core.ui.base.BaseFragment
 import com.shen.mediaplayer.feature.imagelist.adapter.ImageListAdapter
 import com.shen.mediaplayer.feature.imagelist.databinding.FragmentImageListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ImageListFragment : BaseFragment<FragmentImageListBinding>() {
@@ -26,8 +30,7 @@ class ImageListFragment : BaseFragment<FragmentImageListBinding>() {
         return FragmentImageListBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(binding: FragmentImageListBinding, savedInstanceState: Bundle?) {
         setupRecyclerView()
         setupObservers()
         viewModel.loadImageList()
@@ -56,13 +59,20 @@ class ImageListFragment : BaseFragment<FragmentImageListBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.imageList.observe(viewLifecycleOwner) { images ->
-            adapter.submitList(images)
-            binding.emptyState.visibility = if (images.isEmpty()) View.VISIBLE else View.GONE
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.swipeRefresh.isRefreshing = isLoading
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.imageList.collect { images ->
+                        adapter.submitList(images)
+                        binding.emptyState.visibility = if (images.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
+                launch {
+                    viewModel.isLoading.collect { isLoading ->
+                        binding.swipeRefresh.isRefreshing = isLoading
+                    }
+                }
+            }
         }
     }
 

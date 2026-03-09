@@ -1,5 +1,6 @@
 package com.shen.mediaplayer.feature.imagelist.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shen.mediaplayer.core.common.model.MediaFile
 import com.shen.mediaplayer.feature.imagelist.databinding.ItemImageBinding
 import com.shen.mediaplayer.utils.image.ImageLoader
+import java.io.File
 
 class ImageListAdapter(
     private val onItemClick: (MediaFile) -> Unit
@@ -42,10 +44,10 @@ class ImageListAdapter(
         fun bind(mediaFile: MediaFile) {
             ImageLoader.loadImage(
                 binding.ivImage,
-                mediaFile.uri,
+                Uri.fromFile(File(mediaFile.filePath)),
                 cornerRadius = 4f
             )
-            binding.tvFileName.text = mediaFile.displayName
+            binding.tvFileName.text = mediaFile.fileName
         }
     }
 
