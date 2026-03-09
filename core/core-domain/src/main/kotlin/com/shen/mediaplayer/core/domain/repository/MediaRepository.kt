@@ -1,7 +1,7 @@
 package com.shen.mediaplayer.core.domain.repository
 
+import com.shen.mediaplayer.core.common.model.FolderItem
 import com.shen.mediaplayer.core.common.model.MediaFile
-import com.shen.mediaplayer.feature.folders.FolderItem
 
 interface MediaRepository {
     suspend fun getAllAudioFiles(): List<MediaFile>

@@ -2,6 +2,7 @@ package com.shen.mediaplayer.feature.folders
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shen.mediaplayer.core.common.model.FolderItem
 import com.shen.mediaplayer.core.domain.repository.MediaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

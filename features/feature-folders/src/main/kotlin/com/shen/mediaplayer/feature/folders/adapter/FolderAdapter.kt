@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shen.mediaplayer.feature.folders.FolderItem
+import com.shen.mediaplayer.core.common.model.FolderItem
 import com.shen.mediaplayer.feature.folders.R
 import com.shen.mediaplayer.feature.folders.databinding.ItemFolderBinding
 

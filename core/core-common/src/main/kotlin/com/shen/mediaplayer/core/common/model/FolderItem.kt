@@ -1,4 +1,4 @@
-package com.shen.mediaplayer.feature.folders
+package com.shen.mediaplayer.core.common.model
 
 data class FolderItem(
     val path: String,
