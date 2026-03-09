@@ -40,14 +40,14 @@ class SearchResultAdapter(
         }
 
         fun bind(mediaFile: MediaFile) {
-            binding.tvTitle.text = mediaFile.title
-            binding.tvPath.text = mediaFile.path.substringBeforeLast('/')
+            binding.tvTitle.text = mediaFile.fileName
+            binding.tvPath.text = mediaFile.filePath.substringBeforeLast('/')
             
             val iconRes = when {
-                mediaFile.isVideo -> R.drawable.ic_video
-                mediaFile.isAudio -> R.drawable.ic_music
-                mediaFile.isImage -> R.drawable.ic_image
-                else -> R.drawable.ic_file
+                mediaFile.isVideo -> com.shen.mediaplayer.core.ui.R.drawable.ic_video
+                mediaFile.isAudio -> com.shen.mediaplayer.core.ui.R.drawable.ic_music
+                mediaFile.isImage -> com.shen.mediaplayer.core.ui.R.drawable.ic_image
+                else -> com.shen.mediaplayer.core.ui.R.drawable.ic_file
             }
             binding.ivIcon.setImageResource(iconRes)
 
