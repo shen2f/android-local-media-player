@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.shen.mediaplayer.core.common.model.FolderItem
 import com.shen.mediaplayer.core.ui.base.BaseFragment
 import com.shen.mediaplayer.feature.folders.adapter.FolderAdapter
 import com.shen.mediaplayer.feature.folders.databinding.FragmentFoldersBinding
