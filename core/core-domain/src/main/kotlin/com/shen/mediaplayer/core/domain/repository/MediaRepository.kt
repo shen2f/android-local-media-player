@@ -8,4 +8,5 @@ interface MediaRepository {
     suspend fun getAllVideoFiles(): List<MediaFile>
     suspend fun getFolderContent(path: String?): List<FolderItem>
     suspend fun getMediaFilesInFolder(path: String): List<MediaFile>
+    suspend fun searchMedia(query: String): List<MediaFile>
 }

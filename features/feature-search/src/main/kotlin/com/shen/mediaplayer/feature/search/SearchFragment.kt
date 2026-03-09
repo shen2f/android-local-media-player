@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shen.mediaplayer.core.common.model.MediaFile
@@ -15,9 +18,9 @@ import com.shen.mediaplayer.feature.search.adapter.SearchResultAdapter
 import com.shen.mediaplayer.feature.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.MainScope
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
@@ -33,8 +36,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         return FragmentSearchBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(binding: FragmentSearchBinding, savedInstanceState: Bundle?) {
         setupToolbar()
         setupSearchInput()
         setupRecyclerView()
@@ -71,17 +73,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.searchResults.observe(viewLifecycleOwner) { results ->
-            adapter.submitList(results)
-            if (results.isEmpty()) {
-                binding.tvEmptyState.visibility = View.VISIBLE
-                binding.tvEmptyState.text = if (binding.etQuery.text.isNullOrBlank()) {
-                    "输入关键词开始搜索"
-                } else {
-                    "未找到匹配的媒体文件"
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.searchResults.collect { results ->
+                    adapter.submitList(results)
+                    if (results.isEmpty()) {
+                        binding.tvEmptyState.visibility = View.VISIBLE
+                        binding.tvEmptyState.text = if (binding.etQuery.text.isNullOrBlank()) {
+                            "输入关键词开始搜索"
+                        } else {
+                            "未找到匹配的媒体文件"
+                        }
+                    } else {
+                        binding.tvEmptyState.visibility = View.GONE
+                    }
                 }
-            } else {
-                binding.tvEmptyState.visibility = View.GONE
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shen.mediaplayer.core.common.model.MediaFile
+import com.shen.mediaplayer.feature.search.R
 import com.shen.mediaplayer.feature.search.databinding.ItemSearchResultBinding
 
 class SearchResultAdapter(
